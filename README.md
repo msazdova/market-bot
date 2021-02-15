@@ -22,9 +22,3 @@ npm run start-dev
 ```
 
 which uses nodemon for enhanced local development.
-
-## Testing
-
-```
-npm run test
-```

@@ -120,7 +120,7 @@ const updateOrders = async (bidOrders, askOrders) => {
   await Promise.all(
     bidOrders.map((order) => {
       if (order.status === "pending" && order.price.isGreaterThan(highestBid)) {
-        order.status = "fillded";
+        order.status = "filled";
         assets.ETH = assets.ETH.plus(order.amount);
         console.log(
           `FILLED BID @ PRICE AMOUNT ${
@@ -136,7 +136,7 @@ const updateOrders = async (bidOrders, askOrders) => {
   await Promise.all(
     askOrders.map((order) => {
       if (order.status === "pending" && order.price.isLessThan(lowestAsk)) {
-        order.status = "fillded";
+        order.status = "filled";
         assets.USD = assets.USD.plus(order.amount(multipliedBy(order.price)));
         console.log(
           `FILLED ASK @ PRICE ${
