@@ -9,7 +9,7 @@ exports.getOrderbook = () => {
 
     const requestOptions = {
         resolveWithFullResponse: true,
-        uri: config.deversifiApi.url + config.deversifiApi.version + "/book/" + params.symbol + "/" + params.precision,
+        uri: config.deversifiApi.url + "/book/" + params.symbol + "/" + params.precision,
     };
     
     return request(requestOptions);

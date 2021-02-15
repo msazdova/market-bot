@@ -103,7 +103,7 @@ const updateOrders = async (bidOrders, askOrders) => {
         if (order.status === "pending" && order.price.isGreaterThan(highestBid)) {
             order.status = "fillded";
             assets.ETH = assets.ETH.plus(order.amount);
-            console.log(`FILLED BID @ PRICE AMOUNT ${order.amount} (ETH + ${order.amount.toFixed()} USD - ${order.amount.multipliedBy(order.price)})`);
+            console.log(`FILLED BID @ PRICE AMOUNT ${order.amount} (ETH + ${order.amount.toFixed(8)} USD - ${order.amount.multipliedBy(order.price).toFixed(8)})`);
         }
     }));
 
@@ -111,14 +111,14 @@ const updateOrders = async (bidOrders, askOrders) => {
         if (order.status === "pending" && order.price.isLessThan(lowestAsk)) {
             order.status = "fillded";
             assets.USD = assets.USD.plus(order.amount(multipliedBy(order.price)));
-            console.log(`FILLED ASK @ PRICE ${order.price} AMOUNT (ETH + ${order.amount.toFixed()} USD - ${order.amount.multipliedBy(order.price)})`);
+            console.log(`FILLED ASK @ PRICE ${order.price} AMOUNT (ETH + ${order.amount.toFixed(8)} USD - ${order.amount.multipliedBy(order.price).toFixed((8))})`);
         }       
     }));
 }
 
 const getOverallBalance = () => {
-    console.log("ETH: " + assets.ETH.toFixed().toString());
-    console.log("USD: " + assets.USD.toFixed().toString());
+    console.log("ETH: " + assets.ETH.toFixed(8).toString());
+    console.log("USD: " + assets.USD.toFixed(8).toString());
 }
 
 module.exports = {

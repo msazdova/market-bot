@@ -1,7 +1,6 @@
 const express = require('express');
 const market = require('./market');
 const config = require('./config');
-const { CronJob } = require('cron');
 
 let app = express();
 
@@ -18,13 +17,12 @@ market.init();
  * NOTE: The shortest time interval you can use with cron is 1 minute,
  * therefore manually add timeout to run the job every 30 seconds.
  */
-const job = new CronJob('* * * * *', async () => {
-
-    setTimeout(async () => await market.init(), 5000);
+const start = () => {
+    setInterval(async () => await market.init(), 5000);
 
     setTimeout(() => market.getOverallBalance(), 30000);
-});
+}
 
-job.start();
+start();
 
 
