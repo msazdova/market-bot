@@ -1,6 +1,6 @@
 const express = require('express');
-const market = require('./market.js');
-const config = require('./config.js');
+const market = require('./market');
+const config = require('./config');
 const { CronJob } = require('cron');
 
 let app = express();

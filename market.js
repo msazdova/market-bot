@@ -1,6 +1,5 @@
-const { getOrderbook } = require('./orderbook.js');
-// const orderbook = require('./orderbook.js');
-const config = require('./config.js');
+const { getOrderbook } = require('./deversifiApi');
+const config = require('./config');
 const BigNumber = require('bignumber.js');
 
 let assets = {
@@ -15,7 +14,10 @@ let highestBid, lowestAsk;
 
 const init = async () => {
     const orders = await fetchOrders();
+    if (JSON.parse(orders).length === 0) throw new Error('No orders found.');
+    
     ({ highestBid, lowestAsk } = await getBestPrices(JSON.parse(orders)));
+    
     await placeOrders(highestBid, lowestAsk);
     await updateOrders(bidOrders, askOrders);
 }
@@ -59,6 +61,7 @@ const getValueInRange = (min, max) => {
 }
 
 const makeOrder = async (price, amount) => {
+    // Get random number between range of 0 an 0.05, calculating between 0 - 5%
     let percentage = new BigNumber(getValueInRange(0, 0.05));
 
     const orderPrice =  price.plus(price.multipliedBy(percentage));
